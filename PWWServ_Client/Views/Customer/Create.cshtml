@@ -1,0 +1,42 @@
+﻿@{
+    Layout = null;
+}
+
+@model PWWServ_Client.ViewModels.CustomerVM
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+</head>
+<body>
+    @using (Html.BeginForm("Create", "Customer"))
+    {
+        <table cellpadding="1" cellspasing="1" border="0">
+            <tr>
+                <td>@Html.LabelFor(model => model.Customer.Email)</td>
+                <td>@Html.TextBoxFor(model => model.Customer.Email)</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(model => model.Customer.FirstName)</td>
+                <td>@Html.TextBoxFor(model => model.Customer.FirstName)</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(model => model.Customer.SecondName)</td>
+                <td>@Html.TextBoxFor(model => model.Customer.SecondName)</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(model => model.Customer.PassHesh)</td>
+                <td>@Html.TextBoxFor(model => model.Customer.PassHesh)</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td><input type="submit" value="Save"></td>
+            </tr>
+            
+        </table>    
+    }
+</body>
+</html>

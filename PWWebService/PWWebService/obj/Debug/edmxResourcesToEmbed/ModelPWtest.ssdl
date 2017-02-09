@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PWModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Customers">
+    <Key>
+      <PropertyRef Name="email" />
+    </Key>
+    <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="firstname" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="secondname" Type="nvarchar" MaxLength="15" />
+    <Property Name="passhesh" Type="nvarchar" MaxLength="150" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'testdb.dbo.Events' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Events">
+    <Key>
+      <PropertyRef Name="eventdt" />
+      <PropertyRef Name="process" />
+    </Key>
+    <Property Name="eventdt" Type="datetime" Nullable="false" />
+    <Property Name="process" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="client" Type="nvarchar" MaxLength="50" />
+    <Property Name="transfer" Type="bigint" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'testdb.dbo.Messages' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Messages">
+    <Key>
+      <PropertyRef Name="whendt" />
+      <PropertyRef Name="owner" />
+      <PropertyRef Name="message" />
+    </Key>
+    <Property Name="whendt" Type="datetime" Nullable="false" />
+    <Property Name="owner" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="message" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="stacktrace" Type="text" />
+  </EntityType>
+  <EntityType Name="Transfers">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="whendt" Type="datetime" Nullable="false" />
+    <Property Name="summa" Type="money" Nullable="false" />
+    <Property Name="amount" Type="money" Nullable="false" />
+    <Property Name="client" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="notes" Type="nvarchar" MaxLength="150" />
+    <Property Name="source" Type="bigint" />
+  </EntityType>
+  <EntityContainer Name="PWModelStoreContainer">
+    <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Transfers" EntityType="Self.Transfers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Events" EntityType="Self.Events" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Events].[eventdt] AS [eventdt], 
+    [Events].[process] AS [process], 
+    [Events].[client] AS [client], 
+    [Events].[transfer] AS [transfer]
+    FROM [dbo].[Events] AS [Events]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Messages" EntityType="Self.Messages" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Messages].[whendt] AS [whendt], 
+    [Messages].[owner] AS [owner], 
+    [Messages].[message] AS [message], 
+    [Messages].[stacktrace] AS [stacktrace]
+    FROM [dbo].[Messages] AS [Messages]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>

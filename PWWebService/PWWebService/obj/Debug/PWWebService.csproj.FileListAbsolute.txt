@@ -1,0 +1,9 @@
+F:\__DDSoft\_WebService\Test\PWWebService\PWWebService\obj\Debug\PWWebService.csprojResolveAssemblyReference.cache
+F:\__DDSoft\_WebService\Test\PWWebService\PWWebService\bin\PWWebService.dll
+F:\__DDSoft\_WebService\Test\PWWebService\PWWebService\bin\PWWebService.pdb
+F:\__DDSoft\_WebService\Test\PWWebService\PWWebService\bin\EntityFramework.dll
+F:\__DDSoft\_WebService\Test\PWWebService\PWWebService\bin\EntityFramework.SqlServer.dll
+F:\__DDSoft\_WebService\Test\PWWebService\PWWebService\bin\EntityFramework.xml
+F:\__DDSoft\_WebService\Test\PWWebService\PWWebService\bin\EntityFramework.SqlServer.xml
+F:\__DDSoft\_WebService\Test\PWWebService\PWWebService\obj\Debug\PWWebService.dll
+F:\__DDSoft\_WebService\Test\PWWebService\PWWebService\obj\Debug\PWWebService.pdb

@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PWModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="email" />
+          </Key>
+          <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="firstname" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="secondname" Type="nvarchar" MaxLength="15" />
+          <Property Name="passhesh" Type="nvarchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'testdb.dbo.Events' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Events">
+          <Key>
+            <PropertyRef Name="eventdt" />
+            <PropertyRef Name="process" />
+          </Key>
+          <Property Name="eventdt" Type="datetime" Nullable="false" />
+          <Property Name="process" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="client" Type="nvarchar" MaxLength="50" />
+          <Property Name="transfer" Type="bigint" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'testdb.dbo.Messages' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Messages">
+          <Key>
+            <PropertyRef Name="whendt" />
+            <PropertyRef Name="owner" />
+            <PropertyRef Name="message" />
+          </Key>
+          <Property Name="whendt" Type="datetime" Nullable="false" />
+          <Property Name="owner" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="message" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="stacktrace" Type="text" />
+        </EntityType>
+        <EntityType Name="Transfers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="whendt" Type="datetime" Nullable="false" />
+          <Property Name="summa" Type="money" Nullable="false" />
+          <Property Name="amount" Type="money" Nullable="false" />
+          <Property Name="client" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="notes" Type="nvarchar" MaxLength="150" />
+          <Property Name="source" Type="bigint" />
+        </EntityType>
+        <EntityContainer Name="PWModelStoreContainer">
+          <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Transfers" EntityType="Self.Transfers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Events" EntityType="Self.Events" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Events].[eventdt] AS [eventdt], 
+    [Events].[process] AS [process], 
+    [Events].[client] AS [client], 
+    [Events].[transfer] AS [transfer]
+    FROM [dbo].[Events] AS [Events]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Messages" EntityType="Self.Messages" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Messages].[whendt] AS [whendt], 
+    [Messages].[owner] AS [owner], 
+    [Messages].[message] AS [message], 
+    [Messages].[stacktrace] AS [stacktrace]
+    FROM [dbo].[Messages] AS [Messages]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PWModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CustomerEntity">
+          <Key>
+            <PropertyRef Name="email" />
+          </Key>
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="firstname" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="secondname" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="passhesh" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TransferEntity">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="whendt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="summa" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="amount" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="client" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="notes" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="source" Type="Int64" />
+        </EntityType>
+        <EntityType Name="EventEntity">
+          <Key>
+            <PropertyRef Name="eventdt" />
+            <PropertyRef Name="process" />
+          </Key>
+          <Property Name="eventdt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="process" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="client" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="transfer" Type="Int64" />
+        </EntityType>
+        <EntityType Name="MessageEntity">
+          <Key>
+            <PropertyRef Name="whendt" />
+            <PropertyRef Name="owner" />
+            <PropertyRef Name="message1" />
+          </Key>
+          <Property Name="whendt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="owner" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="message1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="stacktrace" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="PWEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CustomerEntities" EntityType="PWModel.CustomerEntity" />
+          <EntitySet Name="TransferEntities" EntityType="PWModel.TransferEntity" />
+          <EntitySet Name="EventEntities" EntityType="PWModel.EventEntity" />
+          <EntitySet Name="MessageEntities" EntityType="PWModel.MessageEntity" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PWModelStoreContainer" CdmEntityContainer="PWEntities">
+          <EntitySetMapping Name="CustomerEntities">
+            <EntityTypeMapping TypeName="PWModel.CustomerEntity">
+              <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="secondname" ColumnName="secondname" />
+                <ScalarProperty Name="passhesh" ColumnName="passhesh" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TransferEntities">
+            <EntityTypeMapping TypeName="PWModel.TransferEntity">
+              <MappingFragment StoreEntitySet="Transfers">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="whendt" ColumnName="whendt" />
+                <ScalarProperty Name="summa" ColumnName="summa" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="client" ColumnName="client" />
+                <ScalarProperty Name="notes" ColumnName="notes" />
+                <ScalarProperty Name="source" ColumnName="source" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EventEntities">
+            <EntityTypeMapping TypeName="PWModel.EventEntity">
+              <MappingFragment StoreEntitySet="Events">
+                <ScalarProperty Name="eventdt" ColumnName="eventdt" />
+                <ScalarProperty Name="process" ColumnName="process" />
+                <ScalarProperty Name="client" ColumnName="client" />
+                <ScalarProperty Name="transfer" ColumnName="transfer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MessageEntities">
+            <EntityTypeMapping TypeName="PWModel.MessageEntity">
+              <MappingFragment StoreEntitySet="Messages">
+                <ScalarProperty Name="whendt" ColumnName="whendt" />
+                <ScalarProperty Name="owner" ColumnName="owner" />
+                <ScalarProperty Name="message1" ColumnName="message" />
+                <ScalarProperty Name="stacktrace" ColumnName="stacktrace" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

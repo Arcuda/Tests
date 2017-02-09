@@ -1,0 +1,43 @@
+﻿@{
+    Layout = null;
+}
+
+@model PWWServ_Client.ViewModels.TransferVM
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>CreateTransfer</title>
+</head>
+<body>
+    @using (Html.BeginForm("CreatTransfer", "Customer"))
+    {
+        
+        <table cellpadding="1" cellspasing="1" border="0">
+            <tr>
+                <td>@Html.LabelFor(model => model.Transfer.Client)</td>
+                <td>@Html.TextBoxFor(model => model.Transfer.Client)</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(model => model.Transfer.Summa)</td>
+                <td>@Html.TextBoxFor(model => model.Transfer.Summa)</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(model => model.Transfer.Amount)</td>
+                <td>@Html.TextBoxFor(model => model.Transfer.Amount)</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(model => model.Transfer.Notes)</td>
+                <td>@Html.TextBoxFor(model => model.Transfer.Notes)</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td><input type="submit" value="Add transfer"></td>
+            </tr>
+            
+        </table>    
+    }
+</body>
+</html>

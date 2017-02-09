@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PWModelStoreContainer" CdmEntityContainer="PWEntities">
+    <EntitySetMapping Name="CustomerEntities">
+      <EntityTypeMapping TypeName="PWModel.CustomerEntity">
+        <MappingFragment StoreEntitySet="Customers">
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="firstname" ColumnName="firstname" />
+          <ScalarProperty Name="secondname" ColumnName="secondname" />
+          <ScalarProperty Name="passhesh" ColumnName="passhesh" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TransferEntities">
+      <EntityTypeMapping TypeName="PWModel.TransferEntity">
+        <MappingFragment StoreEntitySet="Transfers">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="whendt" ColumnName="whendt" />
+          <ScalarProperty Name="summa" ColumnName="summa" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="client" ColumnName="client" />
+          <ScalarProperty Name="notes" ColumnName="notes" />
+          <ScalarProperty Name="source" ColumnName="source" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EventEntities">
+      <EntityTypeMapping TypeName="PWModel.EventEntity">
+        <MappingFragment StoreEntitySet="Events">
+          <ScalarProperty Name="eventdt" ColumnName="eventdt" />
+          <ScalarProperty Name="process" ColumnName="process" />
+          <ScalarProperty Name="client" ColumnName="client" />
+          <ScalarProperty Name="transfer" ColumnName="transfer" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MessageEntities">
+      <EntityTypeMapping TypeName="PWModel.MessageEntity">
+        <MappingFragment StoreEntitySet="Messages">
+          <ScalarProperty Name="whendt" ColumnName="whendt" />
+          <ScalarProperty Name="owner" ColumnName="owner" />
+          <ScalarProperty Name="message1" ColumnName="message" />
+          <ScalarProperty Name="stacktrace" ColumnName="stacktrace" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

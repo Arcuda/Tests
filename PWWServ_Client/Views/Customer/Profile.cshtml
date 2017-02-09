@@ -1,0 +1,69 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Profile</title>
+</head>
+<body>
+    <br /><br />
+    <table cellpadding="1" cellspasing="1" border="1">
+        <tr>
+            <th>E-Mail</th>
+            <td>@ViewBag.Customer.Email</td>
+        </tr>
+        <tr>
+            <th>First Name</th>
+            <td>@ViewBag.Customer.FirstName</td>
+        </tr>
+        <tr>
+            <th>Second Name</th>
+            <td>@ViewBag.Customer.SecondName</td>
+        </tr>
+    </table>
+    <br />
+    <table cellpadding="1" cellspasing="1" border="1">
+        <tr>
+            <th>Id</th>
+            <th>When</th>
+            <th>Summa</th>
+            <th>Amount</th>
+            <th>Notes</th>
+            <th>Source</th>
+            <th>&nbsp</th>
+        </tr>
+        @if (ViewBag.Transfers != null)
+        {
+            foreach (var _t in ViewBag.Transfers)
+            {
+                <tr>
+                    <td>@_t.Id</td>
+                    <td>@_t.WhenDT</td>
+                    <td>@_t.Summa</td>
+                    <td>@_t.Amount</td>
+                    <td>@_t.Notes</td>
+                    <td>@_t.Source</td>
+                    <td>&nbsp</td>
+                </tr>
+            }
+            <tr>
+                <td colspan="7" align="Center"><a href="@Url.Action("AddTransfer", "Customer")">Add transfer</a></td>
+            </tr>
+            
+        }
+        else
+        {
+            <tr>
+                <td colspan="6">No transfers</td>
+                <td><a href="@Url.Action("AddTransfer", "Customer")">Add</a></td>
+            </tr>
+        }
+    </table>
+    <br /><br />
+    <a href="@Url.Action("Index")">Home</a>
+</body>
+</html>
